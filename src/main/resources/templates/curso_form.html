@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+  <title>Gestión de cursos</title>
+
+</head>
+<body>
+<div class="container" th:replace="fragments/header::header"></div>
+
+  <div class="container-fluid mt-3">
+    <h2 class="text-center">[[${pageTitle}]]</h2>
+    <div class="my-3"></div>
+      <form th:action="@{/cursos/save}" method="POST" enctype="multipart/form-data" th:object="${curso}" class="mx-auto" style="max-width: 550px;">
+        <input type="hidden" th:field="*{id}">
+        <div class="p-3">
+
+          <div class="form-group row ">
+            <label class="col-sm-3 col-form-label" for="titulo">Titulo</label>
+            <div class="col-sm-9">
+              <input type="text" th:field="*{titulo}"  minlength="2" maxlength="128" class="form-control" id="titulo"/>
+            </div>
+          </div>
+
+          <div class="form-group row mt-2">
+            <label class="col-sm-3 col-form-label" for="descripcion">Descripcion</label>
+            <div class="col-sm-9">
+              <input type="text" th:field="*{descripcion}"  minlength="2" maxlength="256" class="form-control" id="descripcion"/>
+            </div>
+          </div>
+
+          <div class="form-group row mt-2">
+            <label class="col-sm-3 col-form-label" for="nivel">Nivel</label>
+            <div class="col-sm-9">
+              <input type="text" th:field="*{nivel}"  min="2"  class="form-control" id="nivel"/>
+            </div>
+          </div>
+
+          <div class="form-group row mt-2">
+            <label class="col-sm-3 col-form-label">Publicado</label>
+            <div class="col-sm-9">
+              <input type="checkbox" th:field="*{publicado}"/>
+            </div>
+          </div>
+
+          <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-sm mr-2">GUARDAR</button>
+            <button type="submit" class="btn btn-secondary btn-sm" id="btnCancelar">CANCELAR</button>
+          </div>
+
+        </div>
+      </form>
+  </div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#btnCancelar").on("click", function(){
+          window.location="[[@{/cursos}]]";
+        });
+    })
+</script>
+</body>
+</html>
